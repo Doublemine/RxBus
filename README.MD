@@ -17,7 +17,7 @@
 
 ```gradle
 	dependencies {
-	        compile 'io.reactivex:rxjava:1.1.6
+	        compile 'io.reactivex:rxjava:1.1.6'
 	        compile 'com.github.Doublemine:RxBus:0.0.1'
 	}
 ```
