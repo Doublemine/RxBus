@@ -2,7 +2,9 @@ package work.wanghao.rxbus;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import work.wanghao.library.OnRxBusEvent;
+import work.wanghao.library.RxBus;
+import work.wanghao.library.RxBusEvent;
 
 public class SecondActivity extends AppCompatActivity {
 
@@ -11,14 +13,36 @@ public class SecondActivity extends AppCompatActivity {
     setContentView(R.layout.activity_second);
   }
 
-  private void initText() {
-    StackTraceElement stackTraceElement[] = new Throwable().getStackTrace();
-    for (int i = 0; i < stackTraceElement.length; i++) {
-      StackTraceElement element = stackTraceElement[i];
-      Log.d("getClassName", "element.getClassName()-->" + i + "-->" + element.getClassName());
-      Log.d("getMethodName", "element.getMethodName()" + i + "-->" + element.getMethodName());
-      Log.d("getLineNumber", "element.getLineNumber()" + i + "-->" + element.getLineNumber() + "");
-      Log.d("getFileName", "element.getFileName()" + i + "-->" + element.getFileName());
-    }
+  private void onEventMsg() {
+
+    RxBus.getDefault().doOnMainThread(EventMsg.class, new OnRxBusEvent() {
+      @Override public void onEvent(RxBusEvent rxBusEvent) {
+        EventMsg eventMsg = (EventMsg) rxBusEvent;
+        /**
+         * do something
+         **/
+      }
+    });
+  }
+
+  private void sendEventMsg() {
+
+    /**
+     *
+     * do something
+     *
+     * the EventMsg mush extends RxBusEvent
+     *
+     * */
+
+    RxBus.getDefault().post(new EventMsg("some event message.."));
+  }
+
+  /**
+   * On Activity
+   */
+  @Override protected void onDestroy() {
+    super.onDestroy();
+    RxBus.getDefault().release(this);
   }
 }
