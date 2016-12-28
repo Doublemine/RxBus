@@ -184,6 +184,10 @@ public class RxBus {
     return "NoneOfClass";
   }
 
+  public boolean hasObservers() {
+    return mBus.hasObservers();
+  }
+
   /**
    * <b>不推荐此方法</b>
    *
