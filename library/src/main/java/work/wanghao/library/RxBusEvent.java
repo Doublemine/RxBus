@@ -5,6 +5,6 @@ package work.wanghao.library;
  * Author: wangh
  * Summary: TODO
  */
-public class RxBusEvent {
+public interface RxBusEvent {
 
 }
