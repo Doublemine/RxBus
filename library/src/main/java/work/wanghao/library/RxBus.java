@@ -128,7 +128,8 @@ public class RxBus {
       }
     }, new Action1<Throwable>() {
       @Override public void call(Throwable throwable) {
-        Log.e("RxBus", "出现错误，执行续订:" + throwable.getMessage());
+        if (BuildConfig.DEBUG) throwable.printStackTrace();
+        Log.e("RxBus", "出现错误，执行续订:" + throwable.toString());
         doOnScheduler(schedulers, tag, onRxBusTagEvent);
       }
     }, new Action0() {
