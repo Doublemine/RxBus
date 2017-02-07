@@ -8,7 +8,10 @@ import android.widget.TextView;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 import work.wanghao.rxbus2.RxBus;
+import work.wanghao.rxbus2.ThreadMode;
+import work.wanghao.rxbus2.ThreadModeKt;
 
 public class MainActivity extends AppCompatActivity {
 
