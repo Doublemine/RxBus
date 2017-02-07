@@ -1,9 +1,9 @@
 ### RxBus [![](https://jitpack.io/v/Doublemine/RxBus.svg)](https://jitpack.io/#Doublemine/RxBus)
 
 
-### Compat Rxjava 2.x
+ A lightweight Event Bus, Base On  Rxjava 2.x.
 
-#### A lightweight Event Bus.
+
 
 
 ### Usage:
@@ -22,10 +22,12 @@
 
 ```gradle
 	dependencies {
+
 	        compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
           compile 'io.reactivex.rxjava2:rxjava:2.0.5'
           compile 'com.jakewharton.rxrelay2:rxrelay:2.0.0'
-	        compile 'com.github.Doublemine:RxBus:0.0.2'
+	        compile 'com.github.Doublemine:RxBus:2.0.1'
+
 	}
 ```
 
