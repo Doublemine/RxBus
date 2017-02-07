@@ -5,9 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import work.wanghao.library.OnRxBusEvent;
-import work.wanghao.library.RxBus;
-import work.wanghao.library.RxBusEvent;
+import work.wanghao.rxbus1.OnRxBusEvent;
+import work.wanghao.rxbus1.RxBus;
+import work.wanghao.rxbus1.RxBusEvent;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -2,9 +2,9 @@ package work.wanghao.rxbus;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import work.wanghao.library.OnRxBusEvent;
-import work.wanghao.library.RxBus;
-import work.wanghao.library.RxBusEvent;
+import work.wanghao.rxbus1.OnRxBusEvent;
+import work.wanghao.rxbus1.RxBus;
+import work.wanghao.rxbus1.RxBusEvent;
 
 public class SecondActivity extends AppCompatActivity {
 

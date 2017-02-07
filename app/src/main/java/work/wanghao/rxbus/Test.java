@@ -1,6 +1,6 @@
 package work.wanghao.rxbus;
 
-import work.wanghao.library.RxBusEvent;
+import work.wanghao.rxbus1.RxBusEvent;
 
 /**
  * Create on: 2016-07-23

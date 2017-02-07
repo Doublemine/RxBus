@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="work.wanghao.library">
+    package="work.wanghao.rxbus1">
 
   <application
       android:allowBackup="true"

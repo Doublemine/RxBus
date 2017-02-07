@@ -1,4 +1,4 @@
-package work.wanghao.library;
+package work.wanghao.rxbus1;
 
 import android.util.Log;
 import java.util.ArrayList;

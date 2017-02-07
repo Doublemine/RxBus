@@ -1,4 +1,4 @@
-package work.wanghao.library;
+package work.wanghao.rxbus1;
 
 /**
  * Create on: 2016-07-23
