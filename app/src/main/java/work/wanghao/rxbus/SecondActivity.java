@@ -2,9 +2,7 @@ package work.wanghao.rxbus;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import work.wanghao.rxbus1.OnRxBusEvent;
-import work.wanghao.rxbus1.RxBus;
-import work.wanghao.rxbus1.RxBusEvent;
+import work.wanghao.rxbus2.RxBus;
 
 public class SecondActivity extends AppCompatActivity {
 
@@ -14,15 +12,16 @@ public class SecondActivity extends AppCompatActivity {
   }
 
   private void onEventMsg() {
+    RxBus.Companion.get().asFlowableFilterType(EventMsg.class).subscribe();
 
-    RxBus.getDefault().doOnMainThread(EventMsg.class, new OnRxBusEvent() {
-      @Override public void onEvent(RxBusEvent rxBusEvent) {
-        EventMsg eventMsg = (EventMsg) rxBusEvent;
-        /**
-         * do something
-         **/
-      }
-    });
+    //RxBus.getDefault().doOnMainThread(EventMsg.class, new OnRxBusEvent() {
+    //  @Override public void onEvent(RxBusEvent rxBusEvent) {
+    //    EventMsg eventMsg = (EventMsg) rxBusEvent;
+    //    /**
+    //     * do something
+    //     **/
+    //  }
+    //});
   }
 
   private void sendEventMsg() {
@@ -35,7 +34,7 @@ public class SecondActivity extends AppCompatActivity {
      *
      * */
 
-    RxBus.getDefault().post(new EventMsg("some event message.."));
+    RxBus.Companion.get().post(new EventMsg("some event message.."));
   }
 
   /**
@@ -43,6 +42,5 @@ public class SecondActivity extends AppCompatActivity {
    */
   @Override protected void onDestroy() {
     super.onDestroy();
-    RxBus.getDefault().release(this);
   }
 }

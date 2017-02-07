@@ -1,4 +1,4 @@
-package work.wanghao.rxbus1;
+package work.wanghao.rxbus2;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

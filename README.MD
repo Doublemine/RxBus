@@ -1,5 +1,11 @@
 ### RxBus [![](https://jitpack.io/v/Doublemine/RxBus.svg)](https://jitpack.io/#Doublemine/RxBus)
 
+
+### Compat Rxjava 2.x
+
+#### A lightweight Event Bus.
+
+
 ### Usage:
 
 #### Step 1. Add the JitPack repository to your build file
@@ -16,8 +22,9 @@
 
 ```gradle
 	dependencies {
-	        compile 'io.reactivex:rxandroid:1.2.1'
-            compile 'io.reactivex:rxjava:1.1.6'
+	        compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+          compile 'io.reactivex.rxjava2:rxjava:2.0.5'
+          compile 'com.jakewharton.rxrelay2:rxrelay:2.0.0'
 	        compile 'com.github.Doublemine:RxBus:0.0.2'
 	}
 ```
@@ -31,44 +38,29 @@
 /**
      *
      * do something
-     * 
-     * the EventMsg mush extends RxBusEvent
      *
      * */
 
-    RxBus.getDefault().post(new EventMsg("some event message.."));
+    RxBus.Companion.get().post(new EventMsg("send some message..."));
 
 ```
 
->**The EventMsg must extends RxBusEvent**
 
- - do event Msg
+ - receive event Msg
 
 ```java
 
-RxBus.getDefault().doOnMainThread(EventMsg.class, new OnRxBusEvent() {
-      @Override public void onEvent(RxBusEvent rxBusEvent) {
-        EventMsg eventMsg = (EventMsg) rxBusEvent;
-        /**
-         * do something
-         **/
-      }
-    });
-
+  CompositeDisposable  compositeDisposable = new CompositeDisposable();
+  compositeDisposable.add(RxBus.Companion.get()
+          .asFlowableFilterType(EventMsg.class)
+          .subscribeOn(AndroidSchedulers.mainThread())
+          .subscribe(new Consumer<Object>() {
+            @Override public void accept(Object o) throws Exception {
+              EventMsg eventMsg = (EventMsg) o;
+              /**
+                * do something
+               **/
+            }
+          }));
 ```
-
- - release
-
-```java
-/**
-   * On Activity
-   */
-  @Override protected void onDestroy() {
-    super.onDestroy();
-    RxBus.getDefault().release(this);
-  }
-
-```
-
-The more detail usage ,please visit the source Code.
 
