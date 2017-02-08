@@ -4,6 +4,7 @@ import com.jakewharton.rxrelay2.PublishRelay
 import com.jakewharton.rxrelay2.Relay
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
+import io.reactivex.disposables.CompositeDisposable
 
 /**
  * @author doublemine
@@ -39,6 +40,15 @@ class RxBus private constructor() {
 
   fun asFlowableFilterType(obj: Class<*>): Flowable<*> {
     return mBus.toFlowable(BackpressureStrategy.LATEST).ofType(obj)
+  }
+
+  fun register(any: Any) {
+    val compositeDisposable = CompositeDisposable()
+
+  }
+
+  fun unRegister(any: Any) {
+
   }
 
 }
