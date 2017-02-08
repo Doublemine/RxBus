@@ -22,10 +22,10 @@
 ```gradle
 	dependencies {
 
-	        compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+	 compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
          compile 'io.reactivex.rxjava2:rxjava:2.0.5'
          compile 'com.jakewharton.rxrelay2:rxrelay:2.0.0'
-	        compile 'com.github.Doublemine:RxBus:2.0.1'
+	 compile 'com.github.Doublemine:RxBus:2.1.0'
 
 	}
 ```
@@ -43,6 +43,8 @@
  ```
 
  - Prepare subscribers: Declare and annotate your subscribing method.
+ 
+ 
 
 **NOTE: The method of subscribed only support single argument.**
 
@@ -50,8 +52,12 @@
  @Subscribe(threadMode = ThreadMode.MAIN_THREAD)
  public void onMessageEvent(MessageEvent event) {/* Do something */};
  ```
+ 
+ 
 
 Register and unregister your subscriber. For example on Android, activities and fragments should usually register according to their life cycle:
+
+
 
 ```java
 @Override
@@ -72,6 +78,9 @@ public void onStop() {
  ```java
  RxBus.Companion.get().post(new MessageEvent());
  ```
+
+
+
 
 
 
