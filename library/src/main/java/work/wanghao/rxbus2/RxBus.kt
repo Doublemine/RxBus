@@ -1,10 +1,12 @@
 package work.wanghao.rxbus2
 
+import android.util.Log
 import com.jakewharton.rxrelay2.PublishRelay
 import com.jakewharton.rxrelay2.Relay
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 import io.reactivex.disposables.CompositeDisposable
+import java.util.concurrent.ConcurrentHashMap
 
 /**
  * @author doublemine
@@ -25,6 +27,7 @@ class RxBus private constructor() {
   }
 
   private val mBus: Relay<Any> = PublishRelay.create<Any>().toSerialized()
+  private val mSubSConcurrentHashMap = ConcurrentHashMap<Any, SubscribeContainer>()
 
   fun post(event: Any) {
     mBus.accept(event)
@@ -44,11 +47,17 @@ class RxBus private constructor() {
 
   fun register(any: Any) {
     val compositeDisposable = CompositeDisposable()
-
+    mSubSConcurrentHashMap.put(any, findAnnotatedMethods(any, compositeDisposable))
   }
 
   fun unRegister(any: Any) {
-
+    val targetContainer = mSubSConcurrentHashMap[any]
+    if (targetContainer != null) {
+      targetContainer.getCompositeDisposable().dispose()
+      mSubSConcurrentHashMap.remove(any)
+      if (BuildConfig.DEBUG) Log.d(RxBus::class.java.simpleName,
+          "Unregister the target=${any.javaClass.simpleName}")
+    }
   }
 
 }

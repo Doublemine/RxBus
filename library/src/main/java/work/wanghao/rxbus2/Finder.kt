@@ -4,6 +4,7 @@ package work.wanghao.rxbus2
 
 import io.reactivex.disposables.CompositeDisposable
 import java.lang.reflect.Modifier
+import java.util.*
 
 /**
  * @author doublemine
@@ -11,8 +12,17 @@ import java.lang.reflect.Modifier
  *         Summary:
  */
 
-fun findAnnotatedSubscribeFunctions(any: Any, compositeDisposable: CompositeDisposable) {
-  val methods = any.javaClass.declaredMethods
+fun findAnnotatedMethods(target: Any,
+    compositeDisposable: CompositeDisposable): SubscribeContainer {
+  val methodsContainer = HashSet<HandleEvent>()
+  return findAnnotatedSubscribeFunctions(target = target, compositeDisposable = compositeDisposable,
+      methodContainer = methodsContainer)
+}
+
+private fun findAnnotatedSubscribeFunctions(target: Any,
+    compositeDisposable: CompositeDisposable,
+    methodContainer: HashSet<HandleEvent>): SubscribeContainer {
+  val methods = target.javaClass.declaredMethods
   for (method in methods) {
     if (method.isBridge) continue
     if (!method.isAnnotationPresent(Subscribe::class.java)) continue
@@ -28,8 +38,16 @@ fun findAnnotatedSubscribeFunctions(any: Any, compositeDisposable: CompositeDisp
           "Method $subscribeMethod  has @Subscribe on $parametersClazz but  is NOT 'public'. ")
     }
 
+    val subscribeAnnotation = method.getAnnotation(Subscribe::class.java)
+    val threadMode = subscribeAnnotation.threadMode
+    val handleEvent = HandleEvent(target, method, threadMode)
+    if (!methodContainer.contains(handleEvent)) {
+      methodContainer.add(handleEvent)
+      compositeDisposable.add(handleEvent.getDisposable())
+    }
 
   }
 
+  return SubscribeContainer(target, compositeDisposable, methodContainer)
 
 }
