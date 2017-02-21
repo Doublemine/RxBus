@@ -10,15 +10,15 @@ import io.reactivex.schedulers.Schedulers
  *         Summary:
  */
 enum class ThreadMode {
-  MAIN_THREAD, IO_THREAD, NEW_THREAD, COMPUTE_THREAD;
+  MAIN, IO, NEW, COMPUTE;
 }
 
 fun getScheduler(threadMode: ThreadMode): Scheduler {
   when (threadMode) {
-    ThreadMode.MAIN_THREAD -> return AndroidSchedulers.mainThread()
-    ThreadMode.IO_THREAD -> return Schedulers.io()
-    ThreadMode.NEW_THREAD -> return Schedulers.newThread()
-    ThreadMode.COMPUTE_THREAD -> return Schedulers.computation()
+    ThreadMode.MAIN -> return AndroidSchedulers.mainThread()
+    ThreadMode.IO -> return Schedulers.io()
+    ThreadMode.NEW -> return Schedulers.newThread()
+    ThreadMode.COMPUTE -> return Schedulers.computation()
   }
 }
 
