@@ -9,4 +9,4 @@ package work.wanghao.rxbus2
 @Retention(AnnotationRetention.RUNTIME)
 @Target(AnnotationTarget.FUNCTION)
 @MustBeDocumented
-annotation class Subscribe(val threadMode: ThreadMode = ThreadMode.MAIN_THREAD)
+annotation class Subscribe(val threadMode: ThreadMode = ThreadMode.MAIN)
