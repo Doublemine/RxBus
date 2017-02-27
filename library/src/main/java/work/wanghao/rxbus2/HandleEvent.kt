@@ -43,7 +43,6 @@ class HandleEvent constructor(target: Any, method: Method, threadMode: ThreadMod
   }
 
   override fun equals(other: Any?): Boolean {
-//    if (this == other) return true
     if (other == null) return false
     if (javaClass != other.javaClass) return false
     return method == (other as HandleEvent).method && target == other.target
