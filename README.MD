@@ -24,8 +24,7 @@
 
 	     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
          compile 'io.reactivex.rxjava2:rxjava:2.0.5'
-         compile 'com.jakewharton.rxrelay2:rxrelay:2.0.0'
-	     compile 'com.github.Doublemine:RxBus:2.1.0'
+	     compile 'com.github.Doublemine:RxBus:2.1.1'
 
 	}
 ```
@@ -49,7 +48,7 @@
 **NOTE: The method of subscribed only support single argument.**
 
  ```java
- @Subscribe(threadMode = ThreadMode.MAIN_THREAD)
+ @Subscribe(threadMode = ThreadMode.MAIN)
  public void onMessageEvent(MessageEvent event) {/* Do something */};
  ```
  
