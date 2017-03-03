@@ -13,16 +13,9 @@ class SubscribeContainer constructor(target: Any, compositeDisposable: Composite
     methodContainer: HashSet<HandleEvent>) {
 
 
-  private var mCompositeDisposable: CompositeDisposable
-  private var mMethodContainer: HashSet<HandleEvent>
-  private var mTarget: Any
-
-  init {
-    this.mCompositeDisposable = compositeDisposable
-    this.mMethodContainer = methodContainer
-    this.mTarget = target
-  }
-
+  private var mCompositeDisposable: CompositeDisposable = compositeDisposable
+  private var mMethodContainer: HashSet<HandleEvent> = methodContainer
+  private var mTarget: Any = target
 
   fun getCompositeDisposable(): CompositeDisposable {
     return mCompositeDisposable

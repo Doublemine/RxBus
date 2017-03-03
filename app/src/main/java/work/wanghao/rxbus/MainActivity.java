@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import java.util.ArrayList;
+import java.util.List;
 import work.wanghao.rxbus2.RxBus;
 import work.wanghao.rxbus2.Subscribe;
 import work.wanghao.rxbus2.ThreadMode;
@@ -13,6 +15,7 @@ import work.wanghao.rxbus2.ThreadMode;
 public class MainActivity extends AppCompatActivity {
 
   TextView mTextView;
+  private List<String> mData;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -26,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         RxBus.Companion.get().post(new EventMsg("测试方法"));
       }
     });
+    mData = new ArrayList<>();
   }
 
   @Override protected void onDestroy() {
@@ -33,19 +37,21 @@ public class MainActivity extends AppCompatActivity {
     RxBus.Companion.get().unRegister(this);
   }
 
-  @Subscribe(threadMode = ThreadMode.IO) public void testIO(EventMsg eventMsg) {
+  @Subscribe(threadMode = ThreadMode.IO) private void testIO(EventMsg eventMsg) {
     Log.d("TAG", eventMsg.mString + "IO");
+    mData.add(eventMsg.mString);
+    Log.d("TAG", "mData Size=" + mData.size());
   }
 
-  @Subscribe(threadMode = ThreadMode.NEW) public void testNew(EventMsg eventMsg) {
-    Log.d("TAG", eventMsg.mString + "NEW");
-  }
-
-  @Subscribe(threadMode = ThreadMode.MAIN) public void testUI(EventMsg eventMsg) {
-    mTextView.setText(eventMsg.mString);
-  }
-
-  @Subscribe(threadMode = ThreadMode.COMPUTE) public void testCompute(EventMsg eventMsg) {
-    Log.d("TAG", eventMsg.mString + "COMPUTE");
-  }
+  //@Subscribe(threadMode = ThreadMode.NEW) public void testNew(EventMsg eventMsg) {
+  //  Log.d("TAG", eventMsg.mString + "NEW");
+  //}
+  //
+  //@Subscribe(threadMode = ThreadMode.MAIN) public void testUI(EventMsg eventMsg) {
+  //  mTextView.setText(eventMsg.mString);
+  //}
+  //
+  //@Subscribe(threadMode = ThreadMode.COMPUTE) public void testCompute(EventMsg eventMsg) {
+  //  Log.d("TAG", eventMsg.mString + "COMPUTE");
+  //}
 }

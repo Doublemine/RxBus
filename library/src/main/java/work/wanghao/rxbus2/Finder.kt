@@ -43,7 +43,7 @@ private fun findAnnotatedSubscribeFunctions(target: Any,
     val handleEvent = HandleEvent(target, method, threadMode)
     if (!methodContainer.contains(handleEvent)) {
       methodContainer.add(handleEvent)
-      compositeDisposable.add(handleEvent.getDisposable())
+      compositeDisposable.add(handleEvent.mDisposable)
     }
 
   }
